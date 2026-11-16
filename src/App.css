@@ -1,0 +1,287 @@
+/* ==================== CUSTOM ANIMATIONS & EFFECTS ==================== */
+
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dot-pattern {
+  background-image: radial-gradient(circle, #d9d9d9 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.diagonal-lines {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    #d9d9d9 10px,
+    #d9d9d9 11px
+  );
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.letter-animate span {
+  display: inline-block;
+  animation: letterBounce 0.5s ease forwards;
+  opacity: 0;
+}
+
+.letter-animate span:nth-child(1) { animation-delay: 0s; }
+.letter-animate span:nth-child(2) { animation-delay: 0.05s; }
+.letter-animate span:nth-child(3) { animation-delay: 0.1s; }
+.letter-animate span:nth-child(4) { animation-delay: 0.15s; }
+.letter-animate span:nth-child(5) { animation-delay: 0.2s; }
+
+@keyframes letterBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.magnetic {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.magnetic:hover {
+  transform: scale(1.05);
+}
+
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg) translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.shine-effect:hover::after {
+  transform: rotate(45deg) translateX(100%);
+}
+
+.corner-brackets {
+  position: relative;
+}
+
+.corner-brackets::before,
+.corner-brackets::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+  transition: all 0.3s ease;
+}
+
+.corner-brackets::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-brackets::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+.corner-brackets:hover::before {
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+}
+
+.corner-brackets:hover::after {
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.rotate-360 {
+  animation: rotate360 20s linear infinite;
+}
+
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.shadow-hard {
+  box-shadow: 8px 8px 0 #000;
+}
+
+.shadow-hard-hover:hover {
+  box-shadow: 12px 12px 0 #000;
+  transform: translate(-2px, -2px);
+}
+
+.clip-diagonal {
+  clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+}
+
+
+/* Typewriter effect */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid #000;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #000;
+  }
+}
+
+/* Reveal effect */
+.reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.reveal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: reveal 1s ease forwards;
+}
+
+@keyframes reveal {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 0;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* ==================== RESPONSIVE HELPERS ==================== */
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom focus styles */
+.focus-custom:focus {
+  outline: 2px solid #000;
+  outline-offset: 4px;
+}
+
+/* ==================== PRINT OPTIMIZATIONS ==================== */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+}

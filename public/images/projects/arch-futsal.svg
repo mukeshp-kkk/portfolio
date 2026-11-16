@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#f4f4f4"/>
+  <rect x="80" y="80" width="1440" height="80" fill="#ffffff" stroke="#d9d9d9"/>
+  <rect x="120" y="110" width="140" height="20" fill="#000000"/>
+  <rect x="1060" y="110" width="120" height="20" fill="#f0f0f0" stroke="#d9d9d9"/>
+  <rect x="1210" y="110" width="120" height="20" fill="#f0f0f0" stroke="#d9d9d9"/>
+  <rect x="1360" y="110" width="120" height="20" fill="#000000"/>
+  <rect x="80" y="220" width="780" height="520" fill="#ffffff" stroke="#d9d9d9"/>
+  <rect x="100" y="260" width="220" height="22" fill="#000000"/>
+  <rect x="100" y="312" width="420" height="22" fill="#d9d9d9"/>
+  <rect x="100" y="350" width="300" height="22" fill="#d9d9d9"/>
+  <rect x="100" y="420" width="180" height="180" fill="#f0f0f0" stroke="#d9d9d9"/>
+  <rect x="310" y="420" width="180" height="180" fill="#f0f0f0" stroke="#d9d9d9"/>
+  <rect x="520" y="420" width="180" height="180" fill="#f0f0f0" stroke="#d9d9d9"/>
+  <rect x="900" y="220" width="620" height="520" fill="#ffffff" stroke="#d9d9d9"/>
+  <rect x="940" y="260" width="320" height="22" fill="#000000"/>
+  <rect x="940" y="312" width="480" height="18" fill="#d9d9d9"/>
+  <rect x="940" y="350" width="430" height="18" fill="#d9d9d9"/>
+  <rect x="940" y="420" width="220" height="180" fill="#000000"/>
+  <rect x="1188" y="420" width="150" height="180" fill="#f0f0f0" stroke="#d9d9d9"/>
+  <rect x="1348" y="420" width="132" height="180" fill="#f0f0f0" stroke="#d9d9d9"/>
+  <rect x="80" y="780" width="1440" height="60" fill="#ffffff" stroke="#d9d9d9"/>
+  <text x="120" y="820" fill="#333333" font-family="Arial, sans-serif" font-size="28" font-weight="700">Arch Futsal</text>
+  <text x="1220" y="820" fill="#777777" font-family="Arial, sans-serif" font-size="18">Futsal booking platform</text>
+</svg>

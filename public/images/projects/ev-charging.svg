@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#f4f4f4"/>
+  <rect x="80" y="80" width="1440" height="90" fill="#ffffff" stroke="#d9d9d9"/>
+  <rect x="120" y="110" width="180" height="28" fill="#000000"/>
+  <rect x="1300" y="110" width="120" height="28" fill="#f4f4f4" stroke="#d9d9d9"/>
+  <rect x="140" y="220" width="1320" height="540" fill="#ffffff" stroke="#d9d9d9"/>
+  <rect x="220" y="265" width="540" height="420" fill="#f4f4f4" stroke="#d9d9d9"/>
+  <circle cx="395" cy="420" r="110" fill="#000000"/>
+  <circle cx="395" cy="420" r="58" fill="#ffffff"/>
+  <rect x="550" y="348" width="160" height="18" fill="#d9d9d9"/>
+  <rect x="550" y="382" width="200" height="18" fill="#d9d9d9"/>
+  <rect x="550" y="420" width="170" height="18" fill="#d9d9d9"/>
+  <rect x="860" y="260" width="500" height="180" fill="#f4f4f4" stroke="#d9d9d9"/>
+  <rect x="860" y="500" width="500" height="150" fill="#000000"/>
+  <rect x="900" y="320" width="180" height="18" fill="#000000"/>
+  <rect x="900" y="360" width="260" height="18" fill="#d9d9d9"/>
+  <rect x="900" y="545" width="150" height="18" fill="#ffffff"/>
+  <rect x="1120" y="545" width="180" height="18" fill="#d9d9d9"/>
+  <rect x="80" y="780" width="1440" height="60" fill="#ffffff" stroke="#d9d9d9"/>
+  <text x="120" y="820" fill="#333333" font-family="Arial, sans-serif" font-size="28" font-weight="700">EV Charging Platform</text>
+  <text x="1190" y="820" fill="#777777" font-family="Arial, sans-serif" font-size="18">Map-based discovery &amp; booking</text>
+</svg>

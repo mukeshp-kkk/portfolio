@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#ffffff"/>
+  <rect x="80" y="80" width="1440" height="90" fill="#f4f4f4" stroke="#d9d9d9"/>
+  <rect x="120" y="110" width="180" height="28" fill="#000000"/>
+  <rect x="1100" y="110" width="120" height="28" fill="#ffffff" stroke="#d9d9d9"/>
+  <rect x="1240" y="110" width="120" height="28" fill="#ffffff" stroke="#d9d9d9"/>
+  <rect x="1380" y="110" width="90" height="28" fill="#000000"/>
+  <rect x="80" y="220" width="460" height="520" fill="#f4f4f4" stroke="#d9d9d9"/>
+  <rect x="120" y="260" width="240" height="22" fill="#000000"/>
+  <rect x="120" y="310" width="350" height="18" fill="#d9d9d9"/>
+  <rect x="120" y="350" width="300" height="18" fill="#d9d9d9"/>
+  <rect x="120" y="420" width="160" height="220" fill="#000000"/>
+  <rect x="308" y="420" width="180" height="220" fill="#ffffff" stroke="#d9d9d9"/>
+  <rect x="600" y="220" width="920" height="520" fill="#ffffff" stroke="#d9d9d9"/>
+  <rect x="640" y="260" width="200" height="22" fill="#000000"/>
+  <rect x="640" y="312" width="440" height="18" fill="#d9d9d9"/>
+  <rect x="640" y="350" width="390" height="18" fill="#d9d9d9"/>
+  <rect x="640" y="420" width="760" height="220" fill="#f4f4f4" stroke="#d9d9d9"/>
+  <rect x="690" y="472" width="180" height="110" fill="#000000"/>
+  <rect x="900" y="472" width="180" height="110" fill="#ffffff" stroke="#d9d9d9"/>
+  <rect x="1110" y="472" width="180" height="110" fill="#ffffff" stroke="#d9d9d9"/>
+  <rect x="80" y="780" width="1440" height="60" fill="#ffffff" stroke="#d9d9d9"/>
+  <text x="120" y="820" fill="#333333" font-family="Arial, sans-serif" font-size="28" font-weight="700">Time Tailor</text>
+  <text x="1200" y="820" fill="#777777" font-family="Arial, sans-serif" font-size="18">Tailoring marketplace</text>
+</svg>
