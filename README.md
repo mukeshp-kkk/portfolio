@@ -273,3 +273,4 @@ Personal portfolio website for Mukesh Nepali Pariyar.
 ---
 
 Built with attention to detail, smooth animations, and a focus on creating a memorable user experience through sophisticated black-and-white design.
+# portfolio
