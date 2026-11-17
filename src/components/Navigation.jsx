@@ -1,27 +1,64 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [selectedTab, setSelectedTab] = useState('home');
+  const tabsRef = useRef(null);
+
+  const navLinks = useMemo(
+    () => [
+      { name: 'Home', value: 'home', href: '#home' },
+      { name: 'About', value: 'about', href: '#about' },
+      { name: 'Skills', value: 'skills', href: '#skills' },
+      { name: 'Projects', value: 'projects', href: '#projects' },
+      { name: 'Experience', value: 'experience', href: '#experience' },
+      { name: 'Contact', value: 'contact', href: '#contact' },
+    ],
+    []
+  );
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Contact', href: '#contact' },
-  ];
+  useEffect(() => {
+    const tabsNode = tabsRef.current;
+    if (!tabsNode) return;
+
+    const handleTabChange = (event) => {
+      const nextValue = event.detail?.value || 'home';
+      setSelectedTab(nextValue);
+
+      const href = navLinks.find((link) => link.value === nextValue)?.href;
+      if (!href) return;
+
+      const section = document.querySelector(href);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+
+    tabsNode.addEventListener('change', handleTabChange);
+    return () => tabsNode.removeEventListener('change', handleTabChange);
+  }, [navLinks]);
+
+  useEffect(() => {
+    const tabsNode = tabsRef.current;
+    if (!tabsNode) return;
+
+    const index = navLinks.findIndex((link) => link.value === selectedTab);
+    if (index >= 0) {
+      tabsNode.selected = index;
+    }
+  }, [navLinks, selectedTab]);
 
   const scrollToSection = (e, href) => {
     e.preventDefault();
@@ -30,6 +67,19 @@ const Navigation = () => {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsMobileMenuOpen(false);
     }
+  };
+
+  const currentTabLabel = navLinks.find((link) => link.value === selectedTab)?.name || 'Home';
+
+  const sakugaPrimaryButtonStyle = {
+    '--sk-card': '#000000',
+    '--sk-ink': '#ffffff',
+    '--sk-btn-line': '#000000',
+    '--sk-soft': '#d9d9d9',
+    '--sk-sh': '6px 7px 0 #d9d9d9',
+    '--sk-r': '14px',
+    '--sk-bw': '2px',
+    '--sk-acc': '#ff5fa8',
   };
 
   return (
@@ -53,31 +103,44 @@ const Navigation = () => {
             <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-black transition-all duration-300 group-hover:w-full" />
           </motion.a>
 
-          <div className="hidden items-center gap-8 md:flex">
-            {navLinks.map((link) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => scrollToSection(e, link.href)}
-                className="relative text-sm font-medium text-black"
-                whileHover={{ y: -2 }}
-                transition={{ type: 'spring', stiffness: 300 }}
+          <div className="hidden items-center gap-4 md:flex">
+            <div className="flex flex-col items-end gap-2">
+              <sakuga-tabs
+                ref={tabsRef}
+                label="Main navigation"
+                selected={0}
+                style={{
+                  '--sk-card': '#ffffff',
+                  '--sk-ink': '#111111',
+                  '--sk-dim': '#777777',
+                  '--sk-soft': '#d9d9d9',
+                  '--sk-pri': '#111111',
+                  '--sk-acc': '#f4f4f4',
+                  '--sk-sh': '5px 6px 0 #d9d9d9',
+                  '--sk-bw': '2.2px',
+                  '--sk-r': '12px',
+                }}
               >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-black transition-all duration-300 group-hover:w-full" />
-              </motion.a>
-            ))}
+                {navLinks.map((link) => (
+                  <option key={link.value} value={link.value}>
+                    {link.name}
+                  </option>
+                ))}
+              </sakuga-tabs>
+              <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-[#777777]">
+                {currentTabLabel}
+              </span>
+            </div>
 
-            <motion.a
-              href="#contact"
-              onClick={(e) => scrollToSection(e, '#contact')}
-              className="btn-base btn-primary"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
+            <sakuga-button
+              style={sakugaPrimaryButtonStyle}
+              onClick={(event) => {
+                scrollToSection(event, '#contact');
+                event.currentTarget.done?.();
+              }}
             >
               Let's Talk
-              <ArrowUpRight size={16} />
-            </motion.a>
+            </sakuga-button>
           </div>
 
           <motion.button
@@ -137,17 +200,21 @@ const Navigation = () => {
                 </motion.a>
               ))}
 
-              <motion.a
-                href="#contact"
-                onClick={(e) => scrollToSection(e, '#contact')}
-                className="btn-base btn-primary w-full"
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navLinks.length * 0.08 }}
               >
-                Let's Talk
-                <ArrowUpRight size={16} />
-              </motion.a>
+                <sakuga-button
+                  style={sakugaPrimaryButtonStyle}
+                  onClick={(event) => {
+                    scrollToSection(event, '#contact');
+                    event.currentTarget.done?.();
+                  }}
+                >
+                  Let's Talk
+                </sakuga-button>
+              </motion.div>
             </div>
           </motion.div>
         )}

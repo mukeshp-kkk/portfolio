@@ -1,7 +1,31 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, GitBranch, Mail } from 'lucide-react';
+import { GitBranch, Mail } from 'lucide-react';
 
 const Hero = () => {
+  const primaryButtonStyle = {
+    '--sk-card': '#000000',
+    '--sk-ink': '#ffffff',
+    '--sk-btn-line': '#000000',
+    '--sk-soft': '#d9d9d9',
+    '--sk-sh': '6px 7px 0 #d9d9d9',
+    '--sk-r': '14px',
+    '--sk-bw': '2px',
+    '--sk-acc': '#ff5fa8',
+  };
+
+  const secondaryButtonStyle = {
+    '--sk-card': '#ffffff',
+    '--sk-ink': '#000000',
+    '--sk-btn-line': '#000000',
+    '--sk-alt-line': '#000000',
+    '--sk-soft': '#d9d9d9',
+    '--sk-alt-sh': '6px 7px 0 #d9d9d9',
+    '--sk-sh': '6px 7px 0 #d9d9d9',
+    '--sk-r': '14px',
+    '--sk-bw': '2px',
+    '--sk-acc': '#ff5fa8',
+  };
+
   const scrollToSection = (e, href) => {
     e.preventDefault();
     const element = document.querySelector(href);
@@ -64,27 +88,31 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mb-8 flex flex-wrap items-center gap-4"
             >
-              <motion.a
-                href="#projects"
-                onClick={(e) => scrollToSection(e, '#projects')}
-                className="btn-base btn-primary"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+              <sakuga-button
+                style={primaryButtonStyle}
+                onClick={(event) => {
+                  scrollToSection(event, '#projects');
+                  event.currentTarget.done?.();
+                }}
               >
                 View Projects
-                <ArrowRight size={16} />
-              </motion.a>
+              </sakuga-button>
 
-              <motion.a
-                href="/cv.pdf"
-                download="Mukesh-Nepali-Pariyar-CV.pdf"
-                className="btn-base btn-secondary"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+              <sakuga-button
+                variant="secondary"
+                style={secondaryButtonStyle}
+                onClick={(event) => {
+                  const link = document.createElement('a');
+                  link.href = '/cv.pdf';
+                  link.download = 'Mukesh-Nepali-Pariyar-CV.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  link.remove();
+                  event.currentTarget.done?.();
+                }}
               >
-                <Download size={16} />
                 Download CV
-              </motion.a>
+              </sakuga-button>
             </motion.div>
 
             <motion.div

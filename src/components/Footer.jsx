@@ -1,8 +1,10 @@
 import { ArrowUp, GitBranch, Mail } from 'lucide-react';
 
 const Footer = () => {
-  const scrollToTop = () => {
+  const scrollToTop = (event) => {
+    event?.preventDefault?.();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    event?.currentTarget?.done?.();
   };
 
   const currentYear = new Date().getFullYear();
@@ -36,13 +38,21 @@ const Footer = () => {
               <Mail size={16} />
               <span>Email</span>
             </a>
-            <button
+            <sakuga-button
+              style={{
+                '--sk-card': '#000000',
+                '--sk-ink': '#ffffff',
+                '--sk-btn-line': '#000000',
+                '--sk-soft': '#d9d9d9',
+                '--sk-sh': '4px 5px 0 #d9d9d9',
+                '--sk-r': '12px',
+                '--sk-bw': '2px',
+                '--sk-acc': '#ff5fa8',
+              }}
               onClick={scrollToTop}
-              className="inline-flex h-11 w-11 items-center justify-center bg-black text-white transition-colors hover:bg-[#1a1a1a]"
-              aria-label="Back to top"
             >
               <ArrowUp size={18} />
-            </button>
+            </sakuga-button>
           </div>
         </div>
 

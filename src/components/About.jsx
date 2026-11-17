@@ -1,11 +1,22 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { MapPin, GraduationCap, Briefcase, Download } from 'lucide-react';
+import { MapPin, GraduationCap, Briefcase } from 'lucide-react';
 
 const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+  const primaryButtonStyle = {
+    '--sk-card': '#000000',
+    '--sk-ink': '#ffffff',
+    '--sk-btn-line': '#000000',
+    '--sk-soft': '#d9d9d9',
+    '--sk-sh': '6px 7px 0 #d9d9d9',
+    '--sk-r': '14px',
+    '--sk-bw': '2px',
+    '--sk-acc': '#ff5fa8',
+  };
 
   const info = [
     { icon: MapPin, label: 'Location', value: 'Kathmandu, Nepal' },
@@ -52,17 +63,27 @@ const About = () => {
               </p>
             </motion.div>
 
-            <motion.a
-              href="/cv.pdf"
-              download="Mukesh-Nepali-Pariyar-CV.pdf"
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="btn-base btn-primary mt-8"
+              className="mt-8"
             >
-              <Download size={18} />
-              Download CV
-            </motion.a>
+              <sakuga-button
+                style={primaryButtonStyle}
+                onClick={(event) => {
+                  const link = document.createElement('a');
+                  link.href = '/cv.pdf';
+                  link.download = 'Mukesh-Nepali-Pariyar-CV.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  link.remove();
+                  event.currentTarget.done?.();
+                }}
+              >
+                Download CV
+              </sakuga-button>
+            </motion.div>
           </div>
 
           <motion.div

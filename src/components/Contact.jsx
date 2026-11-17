@@ -1,11 +1,22 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Mail, MapPin, GitBranch, Download, ArrowUpRight } from 'lucide-react';
+import { Mail, MapPin, GitBranch, ArrowUpRight } from 'lucide-react';
 
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+  const primaryButtonStyle = {
+    '--sk-card': '#ffffff',
+    '--sk-ink': '#000000',
+    '--sk-btn-line': '#000000',
+    '--sk-soft': '#d9d9d9',
+    '--sk-sh': '6px 7px 0 #d9d9d9',
+    '--sk-r': '14px',
+    '--sk-bw': '2px',
+    '--sk-acc': '#ff5fa8',
+  };
 
   const contactInfo = [
     {
@@ -109,28 +120,51 @@ const Contact = () => {
             </motion.div>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <motion.a
-                href="mailto:muke8122@gmail.com"
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="btn-base btn-on-dark"
               >
-                <Mail size={16} />
-                Email Me
-              </motion.a>
+                <sakuga-button
+                  style={primaryButtonStyle}
+                  onClick={(event) => {
+                    window.location.href = 'mailto:muke8122@gmail.com';
+                    event.currentTarget.done?.();
+                  }}
+                >
+                  Email Me
+                </sakuga-button>
+              </motion.div>
 
-              <motion.a
-                href="/cv.pdf"
-                download="Mukesh-Nepali-Pariyar-CV.pdf"
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.7 }}
-                className="btn-base btn-secondary"
               >
-                <Download size={16} />
-                Download CV
-              </motion.a>
+                <sakuga-button
+                  variant="secondary"
+                  style={{
+                    ...primaryButtonStyle,
+                    '--sk-card': '#111111',
+                    '--sk-ink': '#ffffff',
+                    '--sk-btn-line': '#ffffff',
+                    '--sk-alt-line': '#ffffff',
+                    '--sk-sh': '6px 7px 0 rgba(255,255,255,0.16)',
+                    '--sk-alt-sh': '6px 7px 0 rgba(255,255,255,0.16)',
+                  }}
+                  onClick={(event) => {
+                    const link = document.createElement('a');
+                    link.href = '/cv.pdf';
+                    link.download = 'Mukesh-Nepali-Pariyar-CV.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                    event.currentTarget.done?.();
+                  }}
+                >
+                  Download CV
+                </sakuga-button>
+              </motion.div>
             </div>
           </div>
 

@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ExternalLink, GitBranch, ArrowUpRight } from 'lucide-react';
 import futsalImage from './images/futsal 1.png';
 import evChargingImage from './images/ev-station2.png';
 import skillsScoutImage from './images/skillscout.png';
@@ -57,36 +56,59 @@ const ProjectsShowcase = () => {
     },
   ];
 
+  const primaryButtonStyle = {
+    '--sk-card': '#000000',
+    '--sk-ink': '#ffffff',
+    '--sk-btn-line': '#000000',
+    '--sk-soft': '#d9d9d9',
+    '--sk-sh': '6px 7px 0 #d9d9d9',
+    '--sk-r': '14px',
+    '--sk-bw': '2px',
+    '--sk-acc': '#ff5fa8',
+  };
+
+  const secondaryButtonStyle = {
+    '--sk-card': '#ffffff',
+    '--sk-ink': '#000000',
+    '--sk-btn-line': '#000000',
+    '--sk-alt-line': '#000000',
+    '--sk-soft': '#d9d9d9',
+    '--sk-alt-sh': '6px 7px 0 #d9d9d9',
+    '--sk-sh': '6px 7px 0 #d9d9d9',
+    '--sk-r': '14px',
+    '--sk-bw': '2px',
+    '--sk-acc': '#ff5fa8',
+  };
+
   const renderButtons = (project) => (
     <div className="flex flex-wrap gap-4">
       {project.liveUrl && (
-        <motion.a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-base btn-primary"
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
+        <sakuga-button
+          style={primaryButtonStyle}
+          onClick={(event) => {
+            event.currentTarget.done?.();
+            setTimeout(() => {
+              window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
+            }, 420);
+          }}
         >
-          <ExternalLink size={16} />
           Live Preview
-          <ArrowUpRight size={16} />
-        </motion.a>
+        </sakuga-button>
       )}
 
       {project.githubUrl && (
-        <motion.a
-          href={project.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-base btn-secondary"
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
+        <sakuga-button
+          variant="secondary"
+          style={secondaryButtonStyle}
+          onClick={(event) => {
+            event.currentTarget.done?.();
+            setTimeout(() => {
+              window.open(project.githubUrl, '_blank', 'noopener,noreferrer');
+            }, 420);
+          }}
         >
-          <GitBranch size={16} />
           View Source
-          <ArrowUpRight size={16} />
-        </motion.a>
+        </sakuga-button>
       )}
     </div>
   );
