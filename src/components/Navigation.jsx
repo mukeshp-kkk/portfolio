@@ -43,6 +43,7 @@ const Navigation = () => {
       const section = document.querySelector(href);
       if (section) {
         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.history.replaceState(null, '', href);
       }
     };
 
@@ -64,7 +65,10 @@ const Navigation = () => {
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {
+      const selectedLink = navLinks.find((link) => link.href === href);
+      if (selectedLink) setSelectedTab(selectedLink.value);
       element.scrollIntoView({ behavior: 'smooth' });
+      window.history.replaceState(null, '', href);
       setIsMobileMenuOpen(false);
     }
   };

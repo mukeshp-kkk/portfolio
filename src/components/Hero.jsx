@@ -133,7 +133,9 @@ const Hero = () => {
               </a>
 
               <a
-                href="mailto:muke8122@gmail.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=muke8122@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 border border-[#d9d9d9] bg-white px-4 py-2.5 text-sm font-medium text-black transition-colors hover:border-black hover:bg-black hover:text-white"
                 aria-label="Email"
               >

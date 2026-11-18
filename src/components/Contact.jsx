@@ -23,7 +23,7 @@ const Contact = () => {
       icon: Mail,
       label: 'Email',
       value: 'muke8122@gmail.com',
-      link: 'mailto:muke8122@gmail.com',
+      link: 'https://mail.google.com/mail/?view=cm&fs=1&to=muke8122@gmail.com',
     },
     {
       icon: GitBranch,
@@ -128,7 +128,7 @@ const Contact = () => {
                 <sakuga-button
                   style={primaryButtonStyle}
                   onClick={(event) => {
-                    window.location.href = 'mailto:muke8122@gmail.com';
+                    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=muke8122@gmail.com', '_blank', 'noopener,noreferrer');
                     event.currentTarget.done?.();
                   }}
                 >
@@ -192,7 +192,9 @@ const Contact = () => {
                 </a>
 
                 <a
-                  href="mailto:muke8122@gmail.com"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=muke8122@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-center justify-between border border-white/20 bg-[#111111] px-5 py-4 text-lg font-medium text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                 >
                   <span className="flex items-center gap-3 text-white group-hover:text-black">

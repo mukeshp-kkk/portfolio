@@ -87,9 +87,7 @@ const ProjectsShowcase = () => {
           style={primaryButtonStyle}
           onClick={(event) => {
             event.currentTarget.done?.();
-            setTimeout(() => {
-              window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
-            }, 420);
+            window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
           }}
         >
           Live Preview
@@ -102,9 +100,7 @@ const ProjectsShowcase = () => {
           style={secondaryButtonStyle}
           onClick={(event) => {
             event.currentTarget.done?.();
-            setTimeout(() => {
-              window.open(project.githubUrl, '_blank', 'noopener,noreferrer');
-            }, 420);
+            window.open(project.githubUrl, '_blank', 'noopener,noreferrer');
           }}
         >
           View Source
