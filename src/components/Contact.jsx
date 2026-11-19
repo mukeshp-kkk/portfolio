@@ -1,11 +1,38 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Mail, MapPin, GitBranch, ArrowUpRight } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Mail, MapPin, GitBranch } from 'lucide-react';
 
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [formStatus, setFormStatus] = useState({ type: 'idle', text: '' });
+
+  const handleInput = (event) => {
+    setForm((current) => ({ ...current, [event.target.name]: event.target.value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setFormStatus({ type: 'sending', text: 'Sending your message...' });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data.error || 'Unable to send your message.');
+
+      setForm({ name: '', email: '', subject: '', message: '' });
+      setFormStatus({ type: 'success', text: data.message || 'Thanks! Your message has been sent.' });
+    } catch (error) {
+      setFormStatus({ type: 'error', text: error.message });
+    }
+  };
 
   const primaryButtonStyle = {
     '--sk-card': '#ffffff',
@@ -174,36 +201,85 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="flex flex-col justify-center"
           >
-            <div className="border border-white/20 bg-[#0d0d0d] p-8 sm:p-12">
-              <div className="mb-8 text-[10px] font-medium uppercase tracking-[0.28em] text-white">Connect</div>
-
-              <div className="space-y-5">
-                <a
-                  href="https://github.com/Drogon2000-mp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between border border-white/20 bg-[#111111] px-5 py-4 text-lg font-medium text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-                >
-                  <span className="flex items-center gap-3 text-white group-hover:text-black">
-                    <GitBranch size={20} className="text-white group-hover:text-black" />
-                    GitHub
-                  </span>
-                  <ArrowUpRight size={18} className="text-white transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-black" />
-                </a>
-
-                <a
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=muke8122@gmail.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between border border-white/20 bg-[#111111] px-5 py-4 text-lg font-medium text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-                >
-                  <span className="flex items-center gap-3 text-white group-hover:text-black">
-                    <Mail size={20} className="text-white group-hover:text-black" />
-                    Email
-                  </span>
-                  <ArrowUpRight size={18} className="text-white transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-black" />
-                </a>
+            <div className="border border-white/20 bg-[#0d0d0d] p-6 sm:p-8">
+              <div className="mb-7 flex items-end justify-between border-b border-white/15 pb-5">
+                <div>
+                  <div className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">New message</div>
+                  <h3 className="mt-2 text-2xl font-bold tracking-tight">Let’s talk.</h3>
+                </div>
+                <span className="h-3 w-3 bg-[#ff5fa8]" aria-hidden="true" />
               </div>
+
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <label className="block text-[10px] font-medium uppercase tracking-[0.18em] text-white/60">
+                    Name
+                    <input
+                      name="name"
+                      value={form.name}
+                      onChange={handleInput}
+                      required
+                      autoComplete="name"
+                      placeholder="Your name"
+                      className="mt-2 w-full border border-white/20 bg-black px-4 py-3 text-sm normal-case tracking-normal text-white outline-none transition-colors placeholder:text-white/30 focus:border-white"
+                    />
+                  </label>
+                  <label className="block text-[10px] font-medium uppercase tracking-[0.18em] text-white/60">
+                    Email
+                    <input
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleInput}
+                      required
+                      autoComplete="email"
+                      placeholder="you@example.com"
+                      className="mt-2 w-full border border-white/20 bg-black px-4 py-3 text-sm normal-case tracking-normal text-white outline-none transition-colors placeholder:text-white/30 focus:border-white"
+                    />
+                  </label>
+                </div>
+
+                <label className="block text-[10px] font-medium uppercase tracking-[0.18em] text-white/60">
+                  Subject
+                  <input
+                    name="subject"
+                    value={form.subject}
+                    onChange={handleInput}
+                    placeholder="Project, role, or idea"
+                    className="mt-2 w-full border border-white/20 bg-black px-4 py-3 text-sm normal-case tracking-normal text-white outline-none transition-colors placeholder:text-white/30 focus:border-white"
+                  />
+                </label>
+
+                <label className="block text-[10px] font-medium uppercase tracking-[0.18em] text-white/60">
+                  Message
+                  <textarea
+                    name="message"
+                    value={form.message}
+                    onChange={handleInput}
+                    required
+                    rows={5}
+                    placeholder="Tell me what you’re building..."
+                    className="mt-2 w-full resize-y border border-white/20 bg-black px-4 py-3 text-sm normal-case tracking-normal text-white outline-none transition-colors placeholder:text-white/30 focus:border-white"
+                  />
+                </label>
+
+                <button
+                  type="submit"
+                  disabled={formStatus.type === 'sending'}
+                  className="w-full border-2 border-white bg-white px-5 py-4 text-xs font-bold uppercase tracking-[0.18em] text-black transition-all duration-300 hover:bg-black hover:text-white disabled:cursor-wait disabled:opacity-60"
+                >
+                  {formStatus.type === 'sending' ? 'Sending...' : 'Send Message'}
+                </button>
+
+                {formStatus.text && (
+                  <p
+                    role="status"
+                    className={`border px-4 py-3 text-sm ${formStatus.type === 'success' ? 'border-white/30 bg-white/10 text-white' : 'border-red-400/40 bg-red-400/10 text-red-100'}`}
+                  >
+                    {formStatus.text}
+                  </p>
+                )}
+              </form>
             </div>
           </motion.div>
         </div>
