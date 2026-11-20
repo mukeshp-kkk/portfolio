@@ -94,8 +94,8 @@ const Navigation = () => {
         isScrolled ? 'border-b border-[#d9d9d9] bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'
       }`}
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
+      <div className="mx-auto max-w-7xl px-6 pt-2 lg:px-8">
+        <div className="flex h-24 items-center justify-between">
           <motion.a
             href="#home"
             onClick={(e) => scrollToSection(e, '#home')}
@@ -108,7 +108,7 @@ const Navigation = () => {
           </motion.a>
 
           <div className="hidden items-center gap-4 md:flex">
-            <div className="flex flex-col items-end gap-2">
+            <div className="flex flex-col items-end gap-2 relative z-50">
               <sakuga-tabs
                 ref={tabsRef}
                 label="Main navigation"
