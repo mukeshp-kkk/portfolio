@@ -7,9 +7,12 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js",
+    "server:dev": "node server.js"
   },
   "dependencies": {
+    "express": "^4.22.3",
     "framer-motion": "^14.14.0",
     "lucide-react": "^1.73.0",
     "nodemailer": "^10.6.0",

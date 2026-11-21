@@ -45,6 +45,8 @@ A premium, modern personal portfolio website showcasing frontend development and
 - **Tailwind CSS** — Utility-first CSS framework
 - **Framer Motion** — Animation library
 - **Lucide React** — Icon library
+- **Express.js** — Backend server for API
+- **Nodemailer** — Email service integration
 - **Custom CSS** — Advanced animations and effects
 
 ## 📦 Installation
@@ -59,9 +61,63 @@ npm run dev
 # Build for production
 npm run build
 
+# Start production server (serves built files + API)
+npm start
+
 # Preview production build
 npm run preview
 ```
+
+## 🌐 Deployment to Render
+
+This portfolio includes a working contact form API and is ready to deploy on Render.
+
+### Quick Deploy Commands
+
+For Render dashboard configuration:
+
+**Build Command:**
+```bash
+npm install && npm run build
+```
+
+**Start Command:**
+```bash
+npm start
+```
+
+### Environment Variables Required
+
+Add these in your Render dashboard:
+
+```bash
+NODE_ENV=production
+
+# Email Configuration (Choose SMTP or Brevo API)
+# Option 1: SMTP
+EMAIL_HOST=smtp-relay.brevo.com
+EMAIL_PORT=587
+EMAIL_SECURE=false
+EMAIL_USER=your-smtp-user
+EMAIL_PASS=your-smtp-password
+EMAIL_FROM=your-email@example.com
+
+# Option 2: Brevo API
+BREVO_API_KEY=your-api-key
+BREVO_SENDER_EMAIL=your-email@example.com
+BREVO_SENDER_NAME=Your Name
+
+# Optional
+CONTACT_NOTIFY_EMAIL=your-email@example.com
+```
+
+### Detailed Deployment Guides
+
+- 📖 **RENDER_DEPLOYMENT.md** — Complete Render deployment guide
+- ⚡ **RENDER_COMMANDS.md** — Quick reference for commands
+- 🔧 **render.yaml** — Render configuration file
+
+See these files for step-by-step deployment instructions.
 
 ## 🎯 What Makes This Portfolio Special
 
@@ -96,11 +152,19 @@ portfolio/
 │   ├── index.css          # Main CSS with 40+ effects
 │   ├── App.css            # Additional animations
 │   └── App.jsx            # Main application
+├── api/
+│   └── contact.js         # Contact form API endpoint
+├── lib/
+│   └── contact-email.js   # Email service utilities
 ├── public/                # Static assets
+├── server.js              # Express server (production)
+├── render.yaml            # Render deployment config
 ├── CSS_FEATURES.md        # Complete CSS documentation
 ├── VISUAL_EFFECTS.md      # Visual effects showcase
 ├── CUSTOMIZATION.md       # Customization guide
-├── DEPLOYMENT.md          # Deployment instructions
+├── DEPLOYMENT.md          # General deployment instructions
+├── RENDER_DEPLOYMENT.md   # Render-specific deployment guide
+├── RENDER_COMMANDS.md     # Quick command reference
 └── CHECKLIST.md           # Pre-launch checklist
 ```
 
@@ -231,10 +295,24 @@ Comprehensive guides included:
 
 ## 🚀 Deployment
 
-Quick deploy options:
-- **Vercel** (Recommended) - Auto-detected configuration
-- **Netlify** - Build command: `npm run build`, Publish: `dist`
-- **GitHub Pages** - See DEPLOYMENT.md
+### Render (Recommended for Full-Stack)
+
+**Build Command:** `npm install && npm run build`  
+**Start Command:** `npm start`
+
+Includes working contact form API with email notifications.
+
+See **RENDER_DEPLOYMENT.md** for complete guide.
+
+### Static Hosting (Vercel, Netlify)
+
+For static deployment without contact form API:
+
+- **Vercel** — Auto-detected configuration
+- **Netlify** — Build: `npm run build`, Publish: `dist`
+- **GitHub Pages** — See DEPLOYMENT.md
+
+Note: Contact form requires API backend (use Render or add serverless functions).
 
 See `DEPLOYMENT.md` for detailed instructions.
 
