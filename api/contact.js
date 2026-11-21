@@ -18,6 +18,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Please enter a valid email address.' });
     }
 
+    console.log('Sending contact form email...');
     await sendContactEmails({
       name: name.trim(),
       email: email.trim(),
@@ -25,9 +26,14 @@ export default async function handler(req, res) {
       message: message.trim(),
     });
 
+    console.log('Contact form email sent successfully');
     return res.status(200).json({ ok: true, message: 'Thanks! Your message has been sent.' });
   } catch (error) {
     console.error('Contact form error:', error);
-    return res.status(500).json({ error: 'Your message could not be sent right now. Please try again.' });
+    const errorMessage = error.message || 'Your message could not be sent right now. Please try again.';
+    return res.status(500).json({ 
+      error: errorMessage,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 }
